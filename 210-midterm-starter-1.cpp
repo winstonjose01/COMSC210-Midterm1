@@ -174,36 +174,48 @@ public:
     }
 
     ~DoublyLinkedList() {                               // Destructor to free the allocated memory for the list
-        while (head) {                                  // Travers the list until its empty
-            Node* temp = head;
-            head = head->next;
-            delete temp;
+        while (head) {                                  // Traverse the list until its empty
+            Node* temp = head;                          // Temporary pointer to the current head
+            head = head->next;                          // Move head to the next node
+            delete temp;                                // Free the memory of the current head
         }
     }
-    void print() {
-        Node* current = head;
-        if (!current) {
-            cout << "List is empty." << endl;
-            return;
+    void print() {                                      // Method to print the values in the list from head to tail  
+        Node* current = head;                           // Initialize a pointer to the current head
+        if (!current) {                                 // Checks if the list is empty
+            cout << "List is empty." << endl;           // Output error message if the list is empty
+            return;                                     // Exit the function
         }
-        while (current) {
-            cout << current->data << " ";
-            current = current->next;
+        while (current) {                               // Traverse the list
+            cout << current->data << " ";               // Output the data of the current node followed by a space
+            current = current->next;                    // Move to the next node
         }
-        cout << endl;
+        cout << endl;                                   // Print a newline character
     }
 
-    void print_reverse() {
-        Node* current = tail;
-        if (!current) { 
-            cout << "List is empty." << endl;
-            return;
+    void print_reverse() {                              // Method to print the values in the list from tail to head
+        Node* current = tail;                           // Initialize a pinter to the current tail
+        if (!current) {                                 // Checks if the list is emtpy
+            cout << "List is empty." << endl;           // Output error message if the list is empty
+            return;                                     // Exit the function
         }
-        while (current) {
-            cout << current->data << " ";
-            current = current->prev;
+        while (current) {                               // Traverse the list
+            cout << current->data << " ";               // Output the data of the current node followed by a psace
+            current = current->prev;                    // Move to the previous node
         }
-        cout << endl;
+        cout << endl;                                   // Print a newline character
+    }
+
+    void every_other_element() {                        // Method to prive every other element in the list
+        Node *current = head;                           // Start at the head of the list
+        int index = 0;
+
+        while (current)
+        if (index % 2 == 0) {
+            cout << current ->data << " ";
+        }
+        current 
+
     }
 };
 
