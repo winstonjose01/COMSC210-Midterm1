@@ -53,45 +53,45 @@ public:
         if (temp->next)                                  // Check if the current node has a next node
             temp->next->prev = newNode;                  // Set the previous pointer of the next node to the new node
         else
-            tail = newNode;
-        temp->next = newNode;
+            tail = newNode;                             // Update the tail to the new node if there is no next node
+        temp->next = newNode;                           // Set the next pointer of the current node to the new node
     }
 
-    void delete_val(int value) {
-        if (!head) return;
+    void delete_val(int value) {                        // Method to delete a node with a specific value
+        if (!head) return;                              // Checks if the list is empty , exit the function 
 
-        Node* temp = head;
+        Node* temp = head;                              // Create temporary pointer to traverse the list
         
-        while (temp && temp->data != value)
-            temp = temp->next;
+        while (temp && temp->data != value)             // Traverse the list until the node with the value is found
+            temp = temp->next;                          // Move to the next node
 
-        if (!temp) return; 
+        if (!temp) return;                              // If the value is not found, exit the function
 
-        if (temp->prev)
-            temp->prev->next = temp->next;
+        if (temp->prev)                                 // Checks if the node to be deleted is not the head
+            temp->prev->next = temp->next;              // Update the next pointer of the previous node
         else
-            head = temp->next; 
+            head = temp->next;                          // If it's the head, update the head to the next node
 
-        if (temp->next)
-            temp->next->prev = temp->prev;
+        if (temp->next)                                 // Check if the node to be deleted is not the tail
+            temp->next->prev = temp->prev;              // Update the previous pointer of the next node
         else
-            tail = temp->prev; 
+            tail = temp->prev;                          // If it's the tail, update the tail to the previous node
 
-        delete temp;
+        delete temp;                                    // Delete the temporary node
     }
 
-    void delete_pos(int pos) {
-        if (!head) {
-            cout << "List is empty." << endl;
-            return;
+    void delete_pos(int pos) {                          // Method to delete a node at a specific position
+        if (!head) {                                    // Check if the list is empty
+            cout << "List is empty." << endl;           // Output error message
+            return;                                     // Exit the function
         }
     
-        if (pos == 1) {
-            pop_front();
-            return;
+        if (pos == 1) {                                 // If the position is 1, it's the head of the list
+            pop_front();                                // Call the method to remove the head node
+            return;                                     // Exit the function
         }
     
-        Node* temp = head;
+        Node* temp = head;  
     
         for (int i = 1; i < pos; i++){
             if (!temp) {
