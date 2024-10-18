@@ -44,7 +44,7 @@ public:
 
         if (!temp) {                                     // Check if the position exceeds the list size
             cout << "Position exceeds list size. Node not inserted.\n";    // Output error message
-            delete newNode;                              // Delete the newly created node
+            delete newNode;                              // Delete the newly created node, free the memory
             return;                                      // Exit the function
         }
 
@@ -91,45 +91,45 @@ public:
             return;                                     // Exit the function
         }
     
-        Node* temp = head;  
+        Node* temp = head;                              // Create a temporary pointer to traverse the list
     
-        for (int i = 1; i < pos; i++){
-            if (!temp) {
-                cout << "Position doesn't exist." << endl;
-                return;
+        for (int i = 1; i < pos; i++){                  // Use loop to traverse the list to the specified position
+            if (!temp) {                                // Check if the position exceeds the list
+                cout << "Position doesn't exist." << endl;  // Output error message
+                return;                                 // Exit the function
             }
             else
-                temp = temp->next;
+                temp = temp->next;                      // Move to the next node
         }
-        if (!temp) {
-            cout << "Position doesn't exist." << endl;
-            return;
-        }
-    
-        if (!temp->next) {
-            pop_back();
-            return;
+        if (!temp) {                                    // After traversing, check if the node was found
+            cout << "Position doesn't exist." << endl;  // Output error message
+            return;                                     // Exit the function
         }
     
-        Node* tempPrev = temp->prev;
-        tempPrev->next = temp->next;
-        temp->next->prev = tempPrev;
-        delete temp;
+        if (!temp->next) {                              // Check if the node to be deleted is the tail
+            pop_back();                                 // Call the method to remove the last node
+            return;                                     // Exit the function
+        }
+    
+        Node* tempPrev = temp->prev;                    // Store the previous node
+        tempPrev->next = temp->next;                    // Update the next pointer of the previous node
+        temp->next->prev = tempPrev;                    // Update the previous ponter of the next node
+        delete temp;                                    // Free the memory of the deleted node
     }
 
-    void push_back(int v) {
-        Node* newNode = new Node(v);
-        if (!tail)
-            head = tail = newNode;
-        else {
-            tail->next = newNode;
-            newNode->prev = tail;
-            tail = newNode;
+    void push_back(int v) {                             // Method to add a node at the back of the linked list
+        Node* newNode = new Node(v);                    // Create a new node with the given value v
+        if (!tail)                                      // Checks if the list is empty
+            head = tail = newNode;                      // If empty, set the head and tail to the new node
+        else {  
+            tail->next = newNode;                       // If not empty, set the next pointer to the current tail
+            newNode->prev = tail;                       // Set the previous pointer of the new node
+            tail = newNode;                             // Update the tail to the new node
         }
     }
     
-    void push_front(int v) {
-        Node* newNode = new Node(v);
+    void push_front(int v) {                            // Method to add a node at the front of the list
+        Node* newNode = new Node(v);                    // Create a new node with the give value v
         if (!head)
             head = tail = newNode;
         else {
