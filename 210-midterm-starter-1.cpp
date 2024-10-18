@@ -130,51 +130,51 @@ public:
     
     void push_front(int v) {                            // Method to add a node at the front of the list
         Node* newNode = new Node(v);                    // Create a new node with the give value v
-        if (!head)
-            head = tail = newNode;
+        if (!head)                                      // Check if the list is empty
+            head = tail = newNode;                      // If empty, set the head and tail to the new node
         else {
-            newNode->next = head;
-            head->prev = newNode;
-            head = newNode;
+            newNode->next = head;                       // If not empty, set the next pointer of the new node to the current head
+            head->prev = newNode;                       // Set the previous pointer of teh current head to the new node
+            head = newNode;                             // Update the head to the new node
         }
     }
     
-    void pop_front() {
+    void pop_front() {                                  // Method to remove the front node of the list
 
-        if (!head) {
-            cout << "List is empty." << endl;
-            return;
+        if (!head) {                                    // Checks if the list is empty
+            cout << "List is empty." << endl;           // Output error message
+            return;                                     // Exit the function
         }
 
-        Node * temp = head;
+        Node * temp = head;                             // Create temporary pointer to the current head
 
-        if (head->next) {
-            head = head->next;
-            head->prev = nullptr;
-        }
-        else
-            head = tail = nullptr;
-        delete temp;
-    }
-
-    void pop_back() {
-        if (!tail) {
-            cout << "List is empty." << endl;
-            return;
-        }
-        Node * temp = tail;
-
-        if (tail->prev) {
-            tail = tail->prev;
-            tail->next = nullptr;
+        if (head->next) {                               // Checks if there is a next node    
+            head = head->next;                          // Update the head to the next node
+            head->prev = nullptr;                       // Set the previous pointer of the new head to null pointer
         }
         else
-            head = tail = nullptr;
-        delete temp;
+            head = tail = nullptr;                      // If there is no next node, set the head and tail to null pointer (empty list)
+        delete temp;                                    // Free the memory of the deleted node
     }
 
-    ~DoublyLinkedList() {
-        while (head) {
+    void pop_back() {                                   // Method to remove the back node of the list
+        if (!tail) {                                    // Check if the list is empty   
+            cout << "List is empty." << endl;           // Output error message
+            return;                                     // Exit the function
+        }
+        Node * temp = tail;                             // Create temporary pointer to the current tail
+
+        if (tail->prev) {                               // Check if there is a previous node
+            tail = tail->prev;                          // Update the tail to the previous node
+            tail->next = nullptr;                       // Set the next pointer of the new tail to null pointer
+        }
+        else
+            head = tail = nullptr;                      // If there is no previous node, set the head and tail to null pinter (empty list)
+        delete temp;                                    // Free the memory of the deleted node
+    }
+
+    ~DoublyLinkedList() {                               // Destructor to free the allocated memory for the list
+        while (head) {                                  // Travers the list until its empty
             Node* temp = head;
             head = head->next;
             delete temp;
