@@ -26,32 +26,32 @@ private:
 public:
     DoublyLinkedList() { head = nullptr; tail = nullptr; }  // Constructor to initialize an empty list
 
-    void insert_after(int value, int position) {            // Method to insert a new node at a given position
-        if (position < 0) {
-            cout << "Position must be >= 0." << endl;
-            return;
+    void insert_after(int value, int position) {        // Method to insert a new node at a given position
+        if (position < 0) {                             // Checks if the position value is negative
+            cout << "Position must be >= 0." << endl;   // If position is negative, output error message
+            return;                                     // Exit the function
         }
 
-        Node* newNode = new Node(value);
-        if (!head) {
-            head = tail = newNode;
-            return;
+        Node* newNode = new Node(value);                // Create a new node the given parameter value
+        if (!head) {                                    // Checks if the list is empty
+            head = tail = newNode;                      // If the list is empty, assign both the head and tail to the new node
+            return;                                     // Exit the function
         }
 
-        Node* temp = head;
-        for (int i = 0; i < position && temp; ++i)
-            temp = temp->next;
+        Node* temp = head;                              // Create a temporary pointer to traverse the list
+        for (int i = 0; i < position && temp; ++i)      // Using a loop, traverse to the specified position
+            temp = temp->next;                          // Move to the next node
 
-        if (!temp) {
-            cout << "Position exceeds list size. Node not inserted.\n";
-            delete newNode;
-            return;
+        if (!temp) {                                     // Check if the position exceeds the list size
+            cout << "Position exceeds list size. Node not inserted.\n";    // Output error message
+            delete newNode;                              // Delete the newly created node
+            return;                                      // Exit the function
         }
 
-        newNode->next = temp->next;
-        newNode->prev = temp;
-        if (temp->next)
-            temp->next->prev = newNode;
+        newNode->next = temp->next;                      // Set the next pointer to the new node
+        newNode->prev = temp;                            // Set the previous pointer to the new node
+        if (temp->next)                                  // Check if the current node has a next node
+            temp->next->prev = newNode;                  // Set the previous pointer of the next node to the new node
         else
             tail = newNode;
         temp->next = newNode;
