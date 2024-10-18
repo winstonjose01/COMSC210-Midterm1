@@ -208,14 +208,16 @@ public:
 
     void every_other_element() {                        // Method to prive every other element in the list
         Node *current = head;                           // Start at the head of the list
-        int index = 0;
+        int index = 0;                                  // Initialize index counter
 
-        while (current)
-        if (index % 2 == 0) {
-            cout << current ->data << " ";
+        while (current){                                // Traverse the list
+        if (index % 2 == 0) {   
+            cout << current ->data << " ";              // Output the data of the current node
         }
-        current 
-
+        current = current ->next;                       // Move to the next node
+        index ++;                                       // Increment the index counter
+        }
+    cout << endl;                                       // Print a new line
     }
 };
 
